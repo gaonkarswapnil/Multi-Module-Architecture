@@ -7,7 +7,7 @@ import com.example.domain.repository.UserRepository
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
-    val usersAPI: UsersAPI
+    val usersAPI: UsersAPI 
 ): UserRepository {
     override suspend fun getUserList(): List<UserResponse> {
         val result = usersAPI.getUsersList()
