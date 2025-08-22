@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.dagger.hilt)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -80,6 +81,10 @@ dependencies {
     implementation(libs.material.icons)
 
     implementation(libs.coil.compose)
+
+    implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
+
+    implementation("com.google.firebase:firebase-analytics")
 }
 
 kapt {
