@@ -38,6 +38,9 @@ jobs:
           java-version: 17
           cache: 'gradle'
 
+      - name: Grant Execute Permissions from gradlew
+        run: chmod +x gradlew
+
       - name: Debug build.gradle.kts content
         run: cat app/build.gradle.kts
 
