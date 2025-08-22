@@ -72,6 +72,17 @@ jobs:
           alias: ${{ secrets.ANDROID_DEV_ALIAS }}
           keyPassword: ${{ secrets.ANDROID_DEV_ALIAS_PASSWORD }}
 
+      - name: Verify signed APK exists
+        run: |
+            echo "Signed APK: ${{ steps.sign_apk.outputs.signedReleaseFile }}"
+            ls -la "${{ steps.sign_apk.outputs.signedReleaseFile }}" || echo "APK not found"
+
+      - name: Verify signed AAB exists
+        run: |
+          echo "Signed AAB: ${{ steps.sign_aab.outputs.signedReleaseFile }}"
+          ls -la "${{ steps.sign_aab.outputs.signedReleaseFile }}" || echo "AAB not found"
+      
+
       - name: Upload to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
@@ -79,6 +90,8 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
           groups: team
           file: ${{ steps.sign_apk.outputs.signedReleaseFile }}
+        env:
+          SIGNED_RELEASE_FILE: ${{ steps.sign_apk.outputs.signedReleaseFile }}
 
 #      - name: Setup Authorization with Google Play Store
 #        run: echo '${{ secrets.PLAY_AUTH_JSON }}' > service_account.json
