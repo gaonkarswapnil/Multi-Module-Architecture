@@ -56,6 +56,13 @@ jobs:
       - name: Build Release AAB
         run: ./gradlew clean bundleRelease
 
+      - name: List APK files
+        run: find app/build/outputs -name "*.apk" -type f
+
+      - name: List AAB files
+        run: find app/build/outputs -name "*.aab" -type f
+
+
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
         with:
